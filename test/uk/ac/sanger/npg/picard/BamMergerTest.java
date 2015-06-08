@@ -60,7 +60,7 @@ public class BamMergerTest {
         };
 
         merger.instanceMain(args);   
-        assertEquals(merger.getCommandLine(), "uk.ac.sanger.npg.picard.BamMerger ALIGNED_BAM=testdata/bam/6210_8_aligned.sam INPUT=testdata/bam/6210_8.sam OUTPUT=testdata/6210_8_merged.bam TMP_DIR=[testdata] VALIDATION_STRINGENCY=SILENT CREATE_MD5_FILE=true    ALIGNMENT_PROGRAM_ID=bwa KEEP_ALL_PG=false KEEP_EXTRA_UNMAPPED_READS=false REPLACE_ALIGNED_BASE_QUALITY=false VERBOSITY=INFO QUIET=false COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false"
+        assertEquals(merger.getCommandLine(), "uk.ac.sanger.npg.picard.BamMerger ALIGNED_BAM=testdata/bam/6210_8_aligned.sam INPUT=testdata/bam/6210_8.sam OUTPUT=testdata/6210_8_merged.bam TMP_DIR=[testdata] VALIDATION_STRINGENCY=SILENT CREATE_MD5_FILE=true    ALIGNMENT_PROGRAM_ID=bwa KEEP_ALL_PG=false KEEP_EXTRA_UNMAPPED_READS=false REPLACE_ALIGNED_BASE_QUALITY=false ALIGNED_TAG_DROP= VERBOSITY=INFO QUIET=false COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false"
               );
 
         System.out.println("checking output bam md5");
@@ -70,7 +70,7 @@ public class BamMergerTest {
         File md5File = new File("testdata/6210_8_merged.bam.md5");
         md5File.deleteOnExit();
 
-        assertEquals("1c0d6e37790d29a5e4c7e55e982968dd", CheckMd5.getBamMd5AfterRemovePGVersion(mergedBamFile, "BamMerger"));
+        assertEquals("e9ae659a0896c6aecd3b709a9d0361e8", CheckMd5.getBamMd5AfterRemovePGVersion(mergedBamFile, "BamMerger"));
     }
 
     /**
@@ -93,14 +93,14 @@ public class BamMergerTest {
 
         merger.instanceMain(args);
         
-        assertEquals(merger.getCommandLine(), "uk.ac.sanger.npg.picard.BamMerger ALIGNED_BAM=testdata/bam/6210_8_aligned.sam INPUT=testdata/bam/6210_8_extra_reads.sam OUTPUT=testdata/6210_8_merged_extra_reads.bam KEEP_EXTRA_UNMAPPED_READS=true TMP_DIR=[testdata] VALIDATION_STRINGENCY=SILENT CREATE_MD5_FILE=true    ALIGNMENT_PROGRAM_ID=bwa KEEP_ALL_PG=false REPLACE_ALIGNED_BASE_QUALITY=false VERBOSITY=INFO QUIET=false COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false");
+        assertEquals(merger.getCommandLine(), "uk.ac.sanger.npg.picard.BamMerger ALIGNED_BAM=testdata/bam/6210_8_aligned.sam INPUT=testdata/bam/6210_8_extra_reads.sam OUTPUT=testdata/6210_8_merged_extra_reads.bam KEEP_EXTRA_UNMAPPED_READS=true TMP_DIR=[testdata] VALIDATION_STRINGENCY=SILENT CREATE_MD5_FILE=true    ALIGNMENT_PROGRAM_ID=bwa KEEP_ALL_PG=false REPLACE_ALIGNED_BASE_QUALITY=false ALIGNED_TAG_DROP= VERBOSITY=INFO QUIET=false COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false");
         File mergedBamFile = new File("testdata/6210_8_merged_extra_reads.bam");
         mergedBamFile.deleteOnExit();
 
         File md5File = new File("testdata/6210_8_merged_extra_reads.bam.md5");
         md5File.deleteOnExit();
         
-        assertEquals("26085402890e66aeac5d4e5cc48973a5", CheckMd5.getBamMd5AfterRemovePGVersion(mergedBamFile, "BamMerger"));
+        assertEquals("f3eae6921dca5cfafc4b968206dfca81", CheckMd5.getBamMd5AfterRemovePGVersion(mergedBamFile, "BamMerger"));
     }
     
     /**
@@ -122,14 +122,14 @@ public class BamMergerTest {
 
         merger.instanceMain(args);
         
-        assertEquals(merger.getCommandLine(), "uk.ac.sanger.npg.picard.BamMerger ALIGNED_BAM=testdata/bam/6210_8_aligned.sam INPUT=testdata/bam/6210_8_extra_reads.sam OUTPUT=testdata/6210_8_merged_extra_reads_no_keep.bam TMP_DIR=[testdata] VALIDATION_STRINGENCY=SILENT CREATE_MD5_FILE=true    ALIGNMENT_PROGRAM_ID=bwa KEEP_ALL_PG=false KEEP_EXTRA_UNMAPPED_READS=false REPLACE_ALIGNED_BASE_QUALITY=false VERBOSITY=INFO QUIET=false COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false");
+        assertEquals(merger.getCommandLine(), "uk.ac.sanger.npg.picard.BamMerger ALIGNED_BAM=testdata/bam/6210_8_aligned.sam INPUT=testdata/bam/6210_8_extra_reads.sam OUTPUT=testdata/6210_8_merged_extra_reads_no_keep.bam TMP_DIR=[testdata] VALIDATION_STRINGENCY=SILENT CREATE_MD5_FILE=true    ALIGNMENT_PROGRAM_ID=bwa KEEP_ALL_PG=false KEEP_EXTRA_UNMAPPED_READS=false REPLACE_ALIGNED_BASE_QUALITY=false ALIGNED_TAG_DROP= VERBOSITY=INFO QUIET=false COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false");
         File mergedBamFile = new File("testdata/6210_8_merged_extra_reads_no_keep.bam");
         mergedBamFile.deleteOnExit();
 
         File md5File = new File("testdata/6210_8_merged_extra_reads_no_keep.bam.md5");
         md5File.deleteOnExit();
 
-         assertEquals("159060a1842a2e15c6a3e9464d7c7e51", CheckMd5.getBamMd5AfterRemovePGVersion(mergedBamFile, "BamMerger"));
+         assertEquals("b2ee01dffdb0470608560ba2e5e72dc6", CheckMd5.getBamMd5AfterRemovePGVersion(mergedBamFile, "BamMerger"));
     }
 
     /**
@@ -151,13 +151,13 @@ public class BamMergerTest {
         
         merger.instanceMain(args);
         
-        assertEquals(merger.getCommandLine(), "uk.ac.sanger.npg.picard.BamMerger ALIGNED_BAM=testdata/bam/6210_8_aligned_supp.sam INPUT=testdata/bam/6210_8_supp.sam OUTPUT=testdata/6210_8_merged_supp.bam TMP_DIR=[testdata] VALIDATION_STRINGENCY=SILENT CREATE_MD5_FILE=true    ALIGNMENT_PROGRAM_ID=bwa KEEP_ALL_PG=false KEEP_EXTRA_UNMAPPED_READS=false REPLACE_ALIGNED_BASE_QUALITY=false VERBOSITY=INFO QUIET=false COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false");
+        assertEquals(merger.getCommandLine(), "uk.ac.sanger.npg.picard.BamMerger ALIGNED_BAM=testdata/bam/6210_8_aligned_supp.sam INPUT=testdata/bam/6210_8_supp.sam OUTPUT=testdata/6210_8_merged_supp.bam TMP_DIR=[testdata] VALIDATION_STRINGENCY=SILENT CREATE_MD5_FILE=true    ALIGNMENT_PROGRAM_ID=bwa KEEP_ALL_PG=false KEEP_EXTRA_UNMAPPED_READS=false REPLACE_ALIGNED_BASE_QUALITY=false ALIGNED_TAG_DROP= VERBOSITY=INFO QUIET=false COMPRESSION_LEVEL=5 MAX_RECORDS_IN_RAM=500000 CREATE_INDEX=false");
         File mergedBamFile = new File("testdata/6210_8_merged_supp.bam");
         mergedBamFile.deleteOnExit();
         
         File md5File = new File("testdata/6210_8_merged_supp.bam.md5");
         md5File.deleteOnExit();
         
-        assertEquals("06423e35c7f42b3301c0dd087a6872a5", CheckMd5.getBamMd5AfterRemovePGVersion(mergedBamFile, "BamMerger"));
+        assertEquals("7a8f3154e6b115f1e67d60359b1d21da", CheckMd5.getBamMd5AfterRemovePGVersion(mergedBamFile, "BamMerger"));
     }
 }

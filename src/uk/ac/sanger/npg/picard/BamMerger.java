@@ -89,6 +89,11 @@ public class BamMerger extends PicardCommandLine {
     @Option(shortName= "REPLACE_QUAL", doc="Replace base qualities in aligned bam wtih the ones in unaligned bam if true.")
     public Boolean REPLACE_ALIGNED_BASE_QUALITY = false;
     
+    @Option(shortName= "ALIGN_TAG_DROP", doc="Comma separated list of tags to drop from aligned BAM.")
+    public String ALIGNED_TAG_DROP = "";
+
+    private String[] align_drop_list = new String[0];
+    
     private void mergealign_pairedsupp(SAMRecordIterator iteratorIn, SAMRecordIterator iteratorAlignments, SAMFileWriter out) {
         // We are assuming the primary alignment record always comes first
         SAMRecord alignment = null;
@@ -247,6 +252,10 @@ public class BamMerger extends PicardCommandLine {
         final SAMFileReader alignments  = new SAMFileReader(ALIGNED_BAM);
         SAMFileHeader headerAlignments = alignments.getFileHeader();
 
+        if (!ALIGNED_TAG_DROP.isEmpty()) {
+            align_drop_list = ALIGNED_TAG_DROP.split(",");
+        }
+    
         //keep sequence dictionary from aligned bam
         SAMSequenceDictionary sequenceDictionary = headerAlignments.getSequenceDictionary();
         
@@ -332,10 +341,16 @@ public class BamMerger extends PicardCommandLine {
         }
 
         List<SAMTagAndValue> attributeList = record.getAttributes();
+
+        for (String attribute : align_drop_list) {
+            if (alignment.getAttribute(attribute) != null) {
+                alignment.setAttribute(attribute, null);
+            }
+        }
         for(SAMTagAndValue attribute : attributeList){
             
             String tag = attribute.tag;
-            Object value = attribute.value;            
+            Object value = attribute.value;
             if( alignment.getAttribute(tag) == null && value != null ){
                alignment.setAttribute(tag, value);
             }
