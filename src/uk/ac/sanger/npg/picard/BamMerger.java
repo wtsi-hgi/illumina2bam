@@ -232,8 +232,11 @@ public class BamMerger extends PicardCommandLine {
             }
         }
         // If we have left over records in our aligned BAM something went wrong
-        if( alignment != null || nextAlignment != null || iteratorAlignments.hasNext() ){
+        while( alignment != null || nextAlignment != null || iteratorAlignments.hasNext() ){
             SAMRecord firstRecordLeft = iteratorAlignments.next();
+            if (firstRecordLeft.isSecondaryOrSupplementary())
+                continue;
+
             log.error( firstRecordLeft.getReadName() + " " + firstRecordLeft.getFlags() );
             throw new RuntimeException("The mapped bam file has more reads than the unmapped"
                                        + " after reading their common reads in their begining.");
